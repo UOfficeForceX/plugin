@@ -1,0 +1,30 @@
+<form [formGroup]="form">
+  <table>
+    <tr>
+      <td>
+        <ejs-checkbox formControlName="isShowEmpNo" label="顯示員工編號" [disabled]="!editable">
+        </ejs-checkbox>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <ejs-checkbox  formControlName="isCheckDate"  #mCheck  label="檢查申請日期符合區間" [disabled]="!editable">
+        </ejs-checkbox>
+      </td>
+    </tr>
+    <tr>
+      <td>
+
+        <span>申請日期範圍</span>&nbsp; &nbsp;
+        <ejs-textbox  [readonly]="!mCheck.checked"  formControlName="checkDays"
+         width="100">
+        </ejs-textbox>
+        <uofx-error-tip [control]="checkDaysCtrl">
+          <div *ngIf="checkDaysCtrl.hasError('required') || checkDaysCtrl.hasError('invalidMobile')">
+            請輸入天數
+          </div>
+        </uofx-error-tip>
+      </td>
+    </tr>
+  </table>
+</form>

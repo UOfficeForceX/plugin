@@ -1,0 +1,38 @@
+<div class="control-section" id="sidebarmenu">
+  <!-- header-section  declaration -->
+  <div>
+    <ejs-toolbar id="menuToolbar"
+      (clicked)="toolbarCliked($event)">
+      <e-items>
+        <e-item prefixIcon="e-icons e-menu" tooltipText="Menu">
+        </e-item>
+        <e-item>
+          <ng-template #template>
+            <div class="e-folder">
+              <div class="e-folder-name">Plugin Sample Website</div>
+              <span style="display: none;">{{ 'global.comm.admin.dashboard.title' | translate }}</span>
+            </div>
+          </ng-template>
+        </e-item>
+      </e-items>
+    </ejs-toolbar>
+  </div>
+  <!-- main content declaration -->
+  <div class="main-menu-content" id="maintext">
+    <ng-content></ng-content>
+  </div>
+  <!-- end of main content declaration sidebar element declaration -->
+  <ejs-sidebar id="menuSidebar" class="sidebar-menu"
+    #sidebarMenuInstance [enableDock]='enableDock'
+    [dockSize]="dockSize" [width]="width"
+    [target]="target" [isOpen]="true" type="Auto">
+    <div class="main-menu">
+      <div>
+        <ejs-menu id="dockMenu" [items]="menuItems"
+          orientation="Vertical" cssClass="dock-menu"
+          (select)="onMenuItemSelect($event)">
+        </ejs-menu>
+      </div>
+    </div>
+  </ejs-sidebar>
+</div>

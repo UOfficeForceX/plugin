@@ -1,0 +1,78 @@
+<div>
+  <uofx-form-field-name [name]="name" [required]="required">
+  </uofx-form-field-name>
+</div>
+<div class="fw-control">
+<span>{{editable}}</span>
+<table [formGroup]="form">
+  <tr>
+    <td>
+      <ng-container *ngIf="editable; else elseTemplate1">
+      <div *ngIf="exProps?.isShowEmpNo">
+        <span>員工編號</span>
+
+        <label class="center-align" for="empNo">{{empNo}}</label>
+        <div *ngIf="!empNo && form.controls.invalid">
+          EmpNo必填
+        </div>
+        <uofx-error-block [errorMessage]="errorMessage" [showClose]="true"
+        [showHeader]="true"></uofx-error-block>
+      </div>
+    </ng-container>
+
+    <ng-template #elseTemplate1>
+      <div *ngIf="exProps?.isShowEmpNo">
+        <span>員工編號</span>
+        <label class="center-align" for="empNo">{{value?.empNo}}</label>
+      </div>
+    </ng-template>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <span *ngIf="err">{{err}}</span>
+      <ng-container *ngIf="!err">
+
+      <span>帳號{{account}}</span>&nbsp;&nbsp;&nbsp;
+      <ng-container *ngIf="editable; else elseTemplate2">
+      <span>行動電話</span>&nbsp;&nbsp;&nbsp;
+
+      <ion-input formControlName="mobile"  [placeholder]="'請輸入文字'" >
+      </ion-input>
+      <uofx-error-tip [control]="mobileCtrl">
+        <div *ngIf="mobileCtrl?.hasError('minlength') || mobileCtrl?.hasError('invalidMobile')">
+          行動電話需有10碼數字
+        </div>
+      </uofx-error-tip>
+      </ng-container>
+      <ng-template #elseTemplate2>
+        <span>行動電話</span>&nbsp;&nbsp;&nbsp;
+        <label class="center-align" for="mobile">{{value?.mobile}}</label>
+      </ng-template>
+    </ng-container>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <ng-container *ngIf="editable; else elseTemplate3">
+      <span>申請日期</span>&nbsp; &nbsp;
+
+
+
+      <uofx-date-picker formControlName="applyDate"></uofx-date-picker>
+
+      <uofx-error-tip [control]="applyDateCtrl">
+        <div *ngIf="applyDateCtrl?.hasError('required') || applyDateCtrl?.hasError('invalidApplyDate')">
+          日期必填且不可超出 {{exProps.checkDays}} 天範圍
+        </div>
+      </uofx-error-tip>
+    </ng-container>
+    <ng-template #elseTemplate3>
+    <span>申請日期</span>&nbsp; &nbsp;
+    <label class="center-align" for="applyDate">{{value?.applyDate}}</label>
+  </ng-template>
+    </td>
+  </tr>
+</table>
+
+</div>

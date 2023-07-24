@@ -1,0 +1,356 @@
+Specifies the sample level styles for the sidebar
+#sidebarmenu .icon-menu {
+  font-size: 24px;
+}
+
+#sidebarmenu.control-section {
+  padding: 0;
+}
+
+.container-fluid {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+@media(max-width:500px) {
+  #sidebarmenu #maintext.main-content {
+      height: 800px;
+  }
+}
+
+#sidebarmenu .sidebar-menu {
+  z-index: 20 !important;
+}
+
+#sidebarmenu .dock-menu.e-menu-wrapper {
+  border: 0px;
+}
+
+#maintext.main-content {
+  height: 500px;
+}
+
+#sidebarmenu .sidebar-menu .e-menu-wrapper {
+  border: 0px;
+  height: 500px;
+}
+
+#maintext .menu-content {
+  padding: 15px;
+}
+
+#maintext .paragraph-content {
+  padding: 15px 0;
+  font-weight: normal;
+  font-size: 14px;
+  text-align: initial;
+}
+
+.e-bigger #maintext .paragraph-content {
+  font-size: 16px;
+}
+
+#maintext .sidebar-heading {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.e-bigger #maintext .sidebar-heading {
+  font-size: 18px;
+}
+
+/* vertical-menu styles */
+.sidebar-menu .e-menu-wrapper ul .e-menu-item.e-menu-caret-icon {
+  width: 220px;
+}
+
+.e-close .e-menu-wrapper ul .e-menu-item {
+  width: 50px;
+}
+
+.e-close ul .e-menu-item.e-menu-caret-icon {
+  padding-right: 12px;
+}
+
+.sidebar-menu.e-dock.e-close .e-menu-wrapper ul .e-menu-item .e-caret {
+  display: none;
+}
+
+.sidebar-menu.e-dock.e-close .e-menu-wrapper ul .e-menu-item.e-menu-caret-icon,
+.sidebar-menu.e-dock.e-close .e-menu-wrapper ul.e-vertical {
+  min-width: 0;
+  width: 50px !important;
+}
+
+.sidebar-menu.e-dock.e-close .e-menu-wrapper ul.e-menu {
+  font-size: 0;
+}
+
+.sidebar-menu.e-dock.e-close .e-menu-item .e-menu-icon {
+  font-size: 20px;
+  padding: 0;
+}
+
+.sidebar-menu,
+.e-menu-wrapper,
+.e-menu-wrapper ul {
+  overflow: hidden;
+}
+
+.sidebar-menu .icon-up-hand:before {
+  content: '\e801';
+}
+
+.sidebar-menu .icon-bell-alt:before {
+  content: '\e802';
+}
+
+.sidebar-menu .icon-user:before {
+  content: '\e803';
+}
+
+.sidebar-menu .icon-picture:before {
+  content: '\e804';
+}
+
+.sidebar-menu .icon-comment-alt:before {
+  content: '\e805';
+}
+
+.sidebar-menu .icon-tag:before {
+  content: '\e806';
+}
+
+.sidebar-menu .icon-comment-inv-alt2:before {
+  content: '\e807';
+}
+
+.sidebar-menu .icon-eye:before {
+  content: '\e808';
+}
+
+.sidebar-menu .icon-globe:before {
+  content: '\e809';
+}
+
+.sidebar-menu .icon-bookmark-empty:before {
+  content: '\e810';
+}
+
+.sidebar-menu .icon-bookmark:before {
+  content: '\e811';
+}
+
+#sidebarmenu .icon-menu:before {
+  content: '\e914';
+  font-family: 'sbicons'
+}
+
+/*Specifies the sample level styles for sidebar for dock & closed state */
+.bootstrap5 #sidebarmenu .sidebar-menu.e-dock.e-close .e-menu-wrapper ul .e-menu-item,
+.bootstrap5-dark #sidebarmenu .sidebar-menu.e-dock.e-close .e-menu-wrapper ul .e-menu-item,
+.tailwind #sidebarmenu .sidebar-menu.e-dock.e-close .e-menu-wrapper ul .e-menu-item,
+.tailwind-dark #sidebarmenu .sidebar-menu.e-dock.e-close .e-menu-wrapper ul .e-menu-item {
+  padding: 0 9px;
+}
+
+.bootstrap5.e-bigger #sidebarmenu .sidebar-menu.e-dock.e-close .e-menu-wrapper ul .e-menu-item,
+.bootstrap5-dark.e-bigger #sidebarmenu .sidebar-menu.e-dock.e-close .e-menu-wrapper ul .e-menu-item,
+.tailwind.e-bigger #sidebarmenu .sidebar-menu.e-dock.e-close .e-menu-wrapper ul .e-menu-item,
+.tailwind-dark.e-bigger #sidebarmenu .sidebar-menu.e-dock.e-close .e-menu-wrapper ul .e-menu-item {
+  padding: 0 15px;
+}
+
+.material #sidebarmenu .sidebar-menu.e-dock.e-close .e-menu-wrapper ul .e-menu-item {
+  padding: 0 12px;
+}
+
+.material.e-bigger #sidebarmenu .sidebar-menu.e-dock.e-close .e-menu-wrapper ul .e-menu-item {
+  padding: 0 16px;
+}
+
+.bootstrap #sidebarmenu .sidebar-menu.e-dock.e-close .e-menu-wrapper ul .e-menu-item,
+.bootstrap-dark #sidebarmenu .sidebar-menu.e-dock.e-close .e-menu-wrapper ul .e-menu-item {
+  padding: 0 13px;
+}
+
+.bootstrap4 #sidebarmenu .sidebar-menu.e-dock.e-close .e-menu-wrapper ul .e-menu-item {
+  padding: 0 9px;
+}
+
+.bootstrap4.e-bigger #sidebarmenu .sidebar-menu.e-dock.e-close .e-menu-wrapper ul .e-menu-item {
+  padding: 0 13px;
+}
+
+.fabric #sidebarmenu .sidebar-menu.e-dock.e-close .e-menu-wrapper ul .e-menu-item,
+.fabric-dark #sidebarmenu .sidebar-menu.e-dock.e-close .e-menu-wrapper ul .e-menu-item {
+  padding: 0 7px;
+}
+
+.fabric.e-bigger #sidebarmenu .sidebar-menu.e-dock.e-close .e-menu-wrapper ul .e-menu-item,
+.fabric-dark.e-bigger #sidebarmenu .sidebar-menu.e-dock.e-close .e-menu-wrapper ul .e-menu-item {
+  padding: 0 5px;
+}
+
+.highcontrast #sidebarmenu .sidebar-menu.e-dock.e-close .e-menu-wrapper ul .e-menu-item {
+  padding: 0 4px;
+}
+
+/*Specifies the sample level styles for sidebar for dock & opened state */
+.bootstrap5 #sidebarmenu .sidebar-menu .e-menu-wrapper ul .e-menu-item .e-menu-icon,
+.bootstrap5-dark #sidebarmenu .sidebar-menu .e-menu-wrapper ul .e-menu-item .e-menu-icon,
+.tailwind #sidebarmenu .sidebar-menu .e-menu-wrapper ul .e-menu-item .e-menu-icon,
+.tailwind-dark #sidebarmenu .sidebar-menu .e-menu-wrapper ul .e-menu-item .e-menu-icon {
+  margin: 0 15px 0 7px;
+}
+
+.material #sidebarmenu .sidebar-menu .e-menu-wrapper ul .e-menu-item .e-menu-icon {
+  margin: 0 8px 0 2px;
+}
+
+.bootstrap4 #sidebarmenu .sidebar-menu .e-menu-wrapper ul .e-menu-item .e-menu-icon {
+  margin: 0 16px 0 5px;
+}
+
+.bootstrap4.e-bigger #sidebarmenu .sidebar-menu .e-menu-wrapper ul .e-menu-item .e-menu-icon {
+  margin: 0 16px 0 2px;
+}
+
+.highcontrast #sidebarmenu .sidebar-menu .e-menu-wrapper ul .e-menu-item .e-menu-icon {
+  margin: 0 16px 0 10px;
+}
+
+.bootstrap #sidebarmenu .sidebar-menu .e-menu-wrapper ul .e-menu-item .e-menu-icon,
+.bootstrap-dark #sidebarmenu .sidebar-menu .e-menu-wrapper ul .e-menu-item .e-menu-icon {
+  margin: 0 14px 0 4px;
+}
+
+.fabric #sidebarmenu .sidebar-menu .e-menu-wrapper ul .e-menu-item .e-menu-icon,
+.fabric-dark #sidebarmenu .sidebar-menu .e-menu-wrapper ul .e-menu-item .e-menu-icon {
+  margin: 0 16px 0 9px;
+}
+
+.bootstrap5.e-bigger #sidebarmenu .sidebar-menu .e-menu-wrapper ul .e-menu-item .e-menu-icon,
+.bootstrap5-dark.e-bigger #sidebarmenu .sidebar-menu .e-menu-wrapper ul .e-menu-item .e-menu-icon,
+.tailwind.e-bigger #sidebarmenu .sidebar-menu .e-menu-wrapper ul .e-menu-item .e-menu-icon,
+.tailwind-dark.e-bigger #sidebarmenu .sidebar-menu .e-menu-wrapper ul .e-menu-item .e-menu-icon {
+  margin: 0 20px 0 -2px;
+}
+
+.material.e-bigger #sidebarmenu .sidebar-menu .e-menu-wrapper ul .e-menu-item .e-menu-icon {
+  margin: 0 20px 0 -2px;
+}
+
+.bootstrap.e-bigger #sidebarmenu .sidebar-menu .e-menu-wrapper ul .e-menu-item .e-menu-icon,
+.bootstrap-dark.e-bigger #sidebarmenu .sidebar-menu .e-menu-wrapper ul .e-menu-item .e-menu-icon {
+  margin: 0 24px 0 3px;
+}
+
+.fabric.e-bigger #sidebarmenu .sidebar-menu .e-menu-wrapper ul .e-menu-item .e-menu-icon,
+.fabric-dark.e-bigger #sidebarmenu .sidebar-menu .e-menu-wrapper ul .e-menu-item .e-menu-icon {
+  margin: 0 22px 0 9px;
+}
+
+.highcontrast.e-bigger #sidebarmenu .sidebar-menu .e-menu-wrapper ul .e-menu-item .e-menu-icon {
+  margin: 0 20px 0 8px;
+}
+
+/* Specifies the border bottom styles for toolbar in light theme*/
+.material #sidebarmenu .e-toolbar,
+.tailwind #sidebarmenu .e-toolbar,
+.bootstrap5 #sidebarmenu .e-toolbar {
+  border-bottom: 1px solid #eaeaeae0;
+}
+
+/* Specifies the border bottom styles for toolbar in dark theme*/
+.bootstrap5-dark #sidebarmenu .e-toolbar,
+.tailwind-dark #sidebarmenu .e-toolbar,
+.material-dark #sidebarmenu .e-toolbar {
+  border-bottom: 1px solid #eaeaea63;
+}
+
+/* Specifies the border right color for the sidebar in light theme*/
+.material .sidebar-menu,
+.fabric .sidebar-menu,
+.tailwind .sidebar-menu,
+.highcontrast .sidebar-menu,
+.bootstrap5 .sidebar-menu {
+  border-right: 1px solid #eaeaeae0;
+}
+
+/* Specifies the border right color for the sidebar in dark theme*/
+.material-dark .sidebar-menu,
+.fabric-dark .sidebar-menu,
+.tailwind-dark .sidebar-menu,
+.bootstrap5-dark .sidebar-menu {
+  border-right: 1px solid #eaeaea63;
+}
+
+/* Specifies the sample level styles for toolbar*/
+.material #sidebarmenu .e-toolbar .e-toolbar-items:not(.e-tbar-pos) .e-toolbar-item:first-child {
+  margin-left: 10px;
+}
+
+.bootstrap4 #sidebarmenu .e-toolbar .e-toolbar-items:not(.e-tbar-pos) .e-toolbar-item:first-child {
+  margin-left: 4px;
+}
+
+.bootstrap5.e-bigger #sidebarmenu .e-toolbar .e-toolbar-items:not(.e-tbar-pos) .e-toolbar-item:first-child,
+.bootstrap5-dark.e-bigger #sidebarmenu .e-toolbar .e-toolbar-items:not(.e-tbar-pos) .e-toolbar-item:first-child,
+.highcontrast.e-bigger #sidebarmenu .e-toolbar .e-toolbar-items:not(.e-tbar-pos) .e-toolbar-item:first-child {
+  margin-left: -2px;
+}
+
+.material.e-bigger #sidebarmenu .e-toolbar .e-toolbar-items:not(.e-tbar-pos) .e-toolbar-item:first-child,
+.material-dark.e-bigger #sidebarmenu .e-toolbar .e-toolbar-items:not(.e-tbar-pos) .e-toolbar-item:first-child {
+  margin-left: 5px;
+}
+
+.bootstrap4.e-bigger #sidebarmenu .e-toolbar .e-toolbar-items:not(.e-tbar-pos) .e-toolbar-item:first-child {
+  margin-left: 3px;
+}
+
+.bootstrap #sidebarmenu .e-toolbar .e-toolbar-items:not(.e-tbar-pos) .e-toolbar-item:first-child,
+.bootstrap-dark #sidebarmenu .e-toolbar .e-toolbar-items:not(.e-tbar-pos) .e-toolbar-item:first-child {
+  margin-left: 6px;
+}
+
+.bootstrap.e-bigger #sidebarmenu .e-toolbar .e-toolbar-items:not(.e-tbar-pos) .e-toolbar-item:first-child,
+.bootstrap-dark.e-bigger #sidebarmenu .e-toolbar .e-toolbar-items:not(.e-tbar-pos) .e-toolbar-item:first-child,
+.fabric.e-bigger #sidebarmenu .e-toolbar .e-toolbar-items:not(.e-tbar-pos) .e-toolbar-item:first-child,
+.fabric-dark.e-bigger #sidebarmenu .e-toolbar .e-toolbar-items:not(.e-tbar-pos) .e-toolbar-item:first-child {
+  margin-left: 0px;
+}
+
+.tailwind.e-bigger #sidebarmenu .e-toolbar .e-toolbar-items:not(.e-tbar-pos) .e-toolbar-item:first-child,
+.tailwind-dark.e-bigger #sidebarmenu .e-toolbar .e-toolbar-items:not(.e-tbar-pos) .e-toolbar-item:first-child {
+  margin-left: -2px;
+}
+
+.e-bigger .e-folder {
+  font-size: 18px;
+}
+
+.e-folder {
+  text-align: center;
+  font-weight: 500;
+  font-size: 16px
+}
+
+.bootstrap5 .e-folder-name,
+.bootstrap5-dark .e-folder-name {
+  margin-top: -2px;
+}
+
+.tailwind .e-folder-name,
+.tailwind-dark .e-folder-name,
+.bootstrap4 .e-folder-name,
+.bootstrap .e-folder-name,
+.bootstrap-dark .e-folder-name {
+  margin-top: 3px;
+}
+
+.material .e-folder-name,
+.material-dark .e-folder-name {
+  margin-top: 1px;
+}
