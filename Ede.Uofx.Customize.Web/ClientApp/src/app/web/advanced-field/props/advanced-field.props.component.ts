@@ -1,6 +1,6 @@
 import { JsonPipe } from "@angular/common";
 import { ChangeDetectorRef, Component, Input, OnInit } from "@angular/core";
-import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from "@angular/forms";
+import { AbstractControl, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, ValidationErrors, ValidatorFn, Validators } from "@angular/forms";
 import { AdvancedFieldExProps } from "@shared/advanced-field/advanced.exprops-type";
 
 
@@ -16,8 +16,8 @@ import { createNumberValidatorValidator } from "./numberValidator";
 export class AdvancedFieldPropsComponent extends BpmFwPropsComponent implements OnInit {
 
   @Input() exProps: AdvancedFieldExProps;
-  checkDaysCtrl: FormControl;
-  constructor(public fb: FormBuilder,
+  checkDaysCtrl: UntypedFormControl;
+  constructor(public fb: UntypedFormBuilder,
     private tools: UofxFormTools,
     private cdr: ChangeDetectorRef) {
 
@@ -51,7 +51,7 @@ export class AdvancedFieldPropsComponent extends BpmFwPropsComponent implements 
     this.addFormControl('isCheckDate', null);
     this.addFormControl('checkDays', [Validators.required],
       [createNumberValidatorValidator()]);
-    this.checkDaysCtrl = this.form.controls.checkDays as FormControl;
+    this.checkDaysCtrl = this.form.controls.checkDays as UntypedFormControl;
     if (this.selfControl) {
       this.selfControl.setValidators(validateSelf(this.form));
       this.selfControl.updateValueAndValidity();
@@ -82,7 +82,7 @@ export class AdvancedFieldPropsComponent extends BpmFwPropsComponent implements 
 
 
 }
-function validateSelf(form: FormGroup): ValidatorFn {
+function validateSelf(form: UntypedFormGroup): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
     return form.valid ? null : { formInvalid: true };
   }

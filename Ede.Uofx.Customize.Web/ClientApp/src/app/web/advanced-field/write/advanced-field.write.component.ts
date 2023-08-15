@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, Input, OnInit } from "@angular/core";
-import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from "@angular/forms";
+import { AbstractControl, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, ValidationErrors, ValidatorFn, Validators } from "@angular/forms";
 import { AdvancedFieldExProps, AdvancedFieldModel } from "@shared/advanced-field/advanced.exprops-type";
 import { EmployeeService } from "@shared/advanced-field/employee.service";
 import { CheckBox } from "@syncfusion/ej2-angular-buttons";
@@ -57,15 +57,15 @@ export function createApplyDateValidator(days:number): ValidatorFn {
 })
 
 export class AdvancedFieldWriteComponent extends BpmFwWriteComponent implements OnInit{
-  form: FormGroup;
+  form: UntypedFormGroup;
   value: AdvancedFieldModel;
   @Input() exProps: AdvancedFieldExProps;
 
   errorMessage = [];
   empNo:string;
-  applyDateCtrl: FormControl;
-  mobileCtrl: FormControl;
-  constructor(private fb:FormBuilder,
+  applyDateCtrl: UntypedFormControl;
+  mobileCtrl: UntypedFormControl;
+  constructor(private fb:UntypedFormBuilder,
     private tools:UofxFormTools,
     private cdr: ChangeDetectorRef,
     private pluginService:UofxPluginApiService,
@@ -114,8 +114,8 @@ export class AdvancedFieldWriteComponent extends BpmFwWriteComponent implements 
     }
 
     );
-    this.applyDateCtrl = this.form.controls.applyDate as FormControl;
-    this.mobileCtrl = this.form.controls.mobile as FormControl;
+    this.applyDateCtrl = this.form.controls.applyDate as UntypedFormControl;
+    this.mobileCtrl = this.form.controls.mobile as UntypedFormControl;
 
     //表單送出時驗證
     if (this.selfControl) {
@@ -155,7 +155,7 @@ export class AdvancedFieldWriteComponent extends BpmFwWriteComponent implements 
     }
 
     getFormControl(ctrl:string){
-      return this.form.get(ctrl) as FormControl;
+      return this.form.get(ctrl) as UntypedFormControl;
       //form.controls.email
     }
 
@@ -189,7 +189,7 @@ export class AdvancedFieldWriteComponent extends BpmFwWriteComponent implements 
 
 }
 //BpmFwWriteComponent
-function validateSelf(form: FormGroup): ValidatorFn {
+function validateSelf(form: UntypedFormGroup): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
     return form.valid ? null : { formInvalid: true };
   }
