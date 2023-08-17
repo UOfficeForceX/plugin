@@ -18,7 +18,7 @@
       "prefix": "app",
       "architect": {
         "build": {
-					"builder": "ngx-build-plus:browser",
+          "builder": "ngx-build-plus:browser",
           "options": {
             "aot": true,
             "outputPath": "dist",
@@ -30,23 +30,23 @@
               "src/favicon.ico",
               "src/plugin.manifest.json",
               "src/assets",
-							{
-								"glob": "*.svg",
-								"input": "./node_modules/@uofx/icon/icons",
-								"output": "./assets/icons"
-							}
+              {
+                "glob": "*.svg",
+                "input": "./node_modules/@uofx/icon/icons",
+                "output": "./assets/icons"
+              }
             ],
             "styles": [
-							"node_modules/@uofx/web-components/styles/styles.scss"
+              "node_modules/@uofx/web-components/styles/styles.scss"
             ],
             "scripts": [],
-						"stylePreprocessorOptions": {
-							"includePaths": [
-								"node_modules/@syncfusion",
-								"node_modules/@uofx/web-components/styles"
-							]
-						},
-						"extraWebpackConfig": "webpack.config.js"
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "node_modules/@syncfusion",
+                "node_modules/@uofx/web-components/styles"
+              ]
+            },
+            "extraWebpackConfig": "webpack.config.js"
           },
           "configurations": {
             "production": {
@@ -83,7 +83,7 @@
           "defaultConfiguration": "production"
         },
         "serve": {
-					"builder": "ngx-build-plus:dev-server",
+          "builder": "ngx-build-plus:dev-server",
           "configurations": {
             "production": {
               "browserTarget": "uofx-plugin-sample:build:production",
@@ -98,7 +98,7 @@
           "defaultConfiguration": "development"
         },
         "extract-i18n": {
-					"builder": "ngx-build-plus:extract-i18n",
+          "builder": "ngx-build-plus:extract-i18n",
           "options": {
             "browserTarget": "uofx-plugin-sample:build"
           }
