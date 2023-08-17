@@ -2,11 +2,11 @@ import { AppComponent } from './app.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HomeComponent } from './home/home.component';
+import { HomeComponent } from './develop-lab/home/home.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { IconModule } from './icon.module';
 
-import { NavMenuComponent } from './nav-menu/nav-menu.component';
+import { NavMenuComponent } from './develop-lab/nav-menu/nav-menu.component';
 import { RouterModule } from '@angular/router';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { UofxTranslateLoader } from './translate-loader';
@@ -47,7 +47,7 @@ const EJS_MODULES = [
     HomeComponent,
   ],
   imports: [
-    BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
+    BrowserModule,
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
