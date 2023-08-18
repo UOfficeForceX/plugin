@@ -1,6 +1,5 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, Input } from "@angular/core";
 import { BpmFwDesignComponent } from "@uofx/web-components/form";
-
 
 @Component({
   selector: 'uofx-advanced-field-design-component',
@@ -10,6 +9,6 @@ import { BpmFwDesignComponent } from "@uofx/web-components/form";
 
 export class AdvancedFieldDesignComponent extends BpmFwDesignComponent {
 
-  @Input() exProps:any;
+  @Input() exProps: any;
 
 }

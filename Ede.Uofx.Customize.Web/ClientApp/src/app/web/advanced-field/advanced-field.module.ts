@@ -1,16 +1,22 @@
+import { AdvancedFieldDesignComponent } from './design/advanced-field.design.component';
+import { AdvancedFieldPropsComponent } from './props/advanced-field.props.component';
+import { AdvancedFieldWriteComponent } from './write/advanced-field.write.component';
 import { BASIC_HTTP_HANDLER, BasicHttpHandler, EmployeeHttpHandler } from '@service/basic-http-handler';
 import { BasicHttpClient } from '@service/basic-http-client';
 import { ButtonModule, CheckBoxModule, RadioButtonModule } from '@syncfusion/ej2-angular-buttons';
 import { CommonModule } from '@angular/common';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { DatePickerModule, DateTimePickerModule } from '@syncfusion/ej2-angular-calendars';
 import { DialogModule } from '@syncfusion/ej2-angular-popups';
 import { DropDownListModule } from '@syncfusion/ej2-angular-dropdowns';
+import { EmployeeService } from '@shared/advanced-field/employee.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { GridModule } from '@syncfusion/ej2-angular-grids';
 import { NumericTextBoxModule, TextBoxModule } from '@syncfusion/ej2-angular-inputs';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { UofxDialogModule } from '@uofx/web-components/dialog';
+import { UofxErrorBlockModule, UofxErrorTipModule } from '@uofx/app-components/form';
 import { UofxFileModule } from '@uofx/web-components/file';
 import { UofxFormFieldBaseModule, UofxFormModule } from '@uofx/web-components/form';
 import { UofxIconModule } from '@uofx/web-components/icon';
@@ -20,13 +26,6 @@ import { UofxToastModule } from '@uofx/web-components/toast';
 import { UofxTooltipModule } from '@uofx/web-components/tooltip';
 import { UofxTranslateModule } from '@uofx/web-components';
 import { UofxUserSelectModule } from '@uofx/web-components/user-select';
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA ,NO_ERRORS_SCHEMA} from '@angular/core';
-import { UofxErrorBlockModule, UofxErrorTipModule } from '@uofx/app-components/form';
-import { AdvancedFieldDesignComponent } from './design/advanced-field.design.component';
-import { AdvancedFieldPropsComponent } from './props/advanced-field.props.component';
-import { AdvancedFieldWriteComponent } from './write/advanced-field.write.component';
-import { EmployeeService } from '@shared/advanced-field/employee.service';
-
 
 const EJS_MODULES = [
   ButtonModule,
@@ -69,7 +68,7 @@ const EMP_SERVICES = [
 ];
 
 @NgModule({
-  imports :[
+  imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
@@ -90,14 +89,12 @@ const EMP_SERVICES = [
   ],
   providers: [
     UofxPluginApiService,
-    { provide: BASIC_HTTP_HANDLER, useClass: EmployeeHttpHandler },
-    BasicHttpClient,
-    EmployeeService
+    ...EMP_SERVICES
   ],
   exports: [...COMPONENTS],
   declarations: [...COMPONENTS]
 })
-export class AdvancedFieldModule{
+export class AdvancedFieldModule {
   static comp = {
     props: AdvancedFieldPropsComponent,
     design: AdvancedFieldDesignComponent,

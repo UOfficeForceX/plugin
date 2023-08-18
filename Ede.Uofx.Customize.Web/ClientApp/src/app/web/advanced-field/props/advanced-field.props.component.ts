@@ -1,18 +1,26 @@
-import { JsonPipe } from "@angular/common";
-import { ChangeDetectorRef, Component, Input, OnInit } from "@angular/core";
-import { AbstractControl, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, ValidationErrors, ValidatorFn, Validators } from "@angular/forms";
-import { AdvancedFieldExProps } from "@shared/advanced-field/advanced.exprops-type";
-
-
-import { BpmFwPropsComponent, UofxFormTools } from "@uofx/web-components/form";
-import { createNumberValidatorValidator } from "./numberValidator";
+import {
+  AbstractControl,
+  UntypedFormBuilder,
+  UntypedFormControl,
+  UntypedFormGroup,
+  ValidationErrors,
+  ValidatorFn,
+  Validators
+  } from '@angular/forms';
+import { AdvancedFieldExProps } from '@shared/advanced-field/advanced.exprops-type';
+import { BpmFwPropsComponent, UofxFormTools } from '@uofx/web-components/form';
+import {
+  ChangeDetectorRef,
+  Component,
+  Input,
+  OnInit
+  } from '@angular/core';
+import { createNumberValidatorValidator } from './numberValidator';
 
 @Component({
   selector: 'uofx-advance-field-props-component',
-  templateUrl: './advanced-field.props.component.html',
-  styleUrls: ['./advanced-field.props.component.scss']
+  templateUrl: './advanced-field.props.component.html'
 })
-
 export class AdvancedFieldPropsComponent extends BpmFwPropsComponent implements OnInit {
 
   @Input() exProps: AdvancedFieldExProps;
