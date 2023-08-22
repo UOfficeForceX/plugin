@@ -49,7 +49,7 @@
     "@uofx/error-code": "^1.0.0",
     "@uofx/icon": "^1.0.0",
     "@uofx/plugin-api": "^1.0.0",
-    "@uofx/web-components": "2.0",
+    "@uofx/web-components": "^2.0.1",
     "cldr-data": "^36.0.0",
     "jsencrypt": "^3.1.0",
     "jwt-decode": "^3.1.2",
