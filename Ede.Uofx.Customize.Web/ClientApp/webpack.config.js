@@ -18,7 +18,10 @@ module.exports = {
     runtimeChunk: false
   },
   devServer: {
-    allowedHosts: 'all'
+    allowedHosts: 'all',
+    client: {
+      webSocketURL: 'ws://localhost:40001/ng-cli-ws',
+    }
   },
   resolve: {
     alias: {
