@@ -1,5 +1,4 @@
-import { Component, Inject, ViewChild } from '@angular/core';
-import { ClickEventArgs, MenuEventArgs, MenuItemModel, SidebarComponent } from '@syncfusion/ej2-angular-navigations';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-nav-menu',
@@ -7,59 +6,25 @@ import { ClickEventArgs, MenuEventArgs, MenuItemModel, SidebarComponent } from '
   styleUrls: ['./nav-menu.component.scss']
 })
 export class NavMenuComponent {
-  isExpanded = false;
-
-  collapse() {
-    this.isExpanded = false;
-  }
-
-  toggle() {
-    this.isExpanded = !this.isExpanded;
-  }
-
-
-  @ViewChild('sidebarMenuInstance')
-  public sidebarMenuInstance: SidebarComponent;
-  public menuItems: MenuItemModel[] = [
+  public menuItems = [
     {
-      text: 'Hello Plugin',
-      iconCss: 'e-timeline-week e-icons',
-      items: [
-        { text: 'Design', url: 'hello-world/design' },
+      text: '🎉 Hello Plugin',
+      subItems: [
         { text: 'Props', url: 'hello-world/props' },
         { text: 'Write', url: 'hello-world/write' },
         { separator: true },
-        { text: 'App' },
+        { text: 'App', url: 'hello-world/app' },
       ]
     },
     {
-      text: 'Advamced Plugin',
-      iconCss: 'e-timeline-week e-icons',
-      items: [
+      text: '✈️ Advanced Plugin',
+      subItems: [
         { text: 'Design', url: 'advanced-field/design' },
         { text: 'Props', url: 'advanced-field/props' },
         { text: 'Write', url: 'advanced-field/write' },
         { separator: true },
-        { text: 'App' },
+        { text: 'App', url: 'advanced-field/app' },
       ]
     },
   ];
-  public enableDock: boolean = true;
-  public dockSize: string = '50px';
-  public width: string = '220px';
-  public target: string = '.main-menu-content';
-
-  constructor() {
-
-  }
-
-  toolbarCliked(args: ClickEventArgs) {
-    if (args.item.tooltipText == "Menu") {
-      this.sidebarMenuInstance.toggle();
-    }
-  }
-
-  onMenuItemSelect(ev: MenuEventArgs) {
-    console.log(ev.item);
-  }
 }

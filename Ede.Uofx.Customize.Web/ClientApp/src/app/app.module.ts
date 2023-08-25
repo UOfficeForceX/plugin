@@ -1,19 +1,20 @@
+import { AdvancedFieldModule } from './web/advanced-field/advanced-field.module';
 import { AppComponent } from './app.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { HelloWorldModule } from './web/hello-world/hello-world.module';
+import { Helper } from '@uofx/core';
 import { HomeComponent } from './develop-lab/home/home.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { IconModule } from './icon.module';
-
+import { LayoutComponent } from './develop-lab/layout/layout.component';
+import { MenuModule, SidebarModule, ToolbarModule } from '@syncfusion/ej2-angular-navigations';
 import { NavMenuComponent } from './develop-lab/nav-menu/nav-menu.component';
 import { RouterModule } from '@angular/router';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { UofxTranslateLoader } from './translate-loader';
-import { Helper } from '@uofx/core';
-import { HelloWorldModule } from './web/hello-world/hello-world.module';
-import { MenuModule, SidebarModule, ToolbarModule } from '@syncfusion/ej2-angular-navigations';
-import { AdvancedFieldModule } from './web/advanced-field/advanced-field.module';
+
 
 // #region i18n services
 export function I18nHttpLoaderFactory(http: HttpClient) {
@@ -43,6 +44,7 @@ const EJS_MODULES = [
 @NgModule({
   declarations: [
     AppComponent,
+    LayoutComponent,
     NavMenuComponent,
     HomeComponent,
   ],
@@ -66,7 +68,6 @@ const EJS_MODULES = [
     IconModule.forRoot(),
     AdvancedFieldModule,
     HelloWorldModule
-
   ],
   providers: [
     { provide: 'BASE_HREF', useFactory: Helper.getBaseHref }
