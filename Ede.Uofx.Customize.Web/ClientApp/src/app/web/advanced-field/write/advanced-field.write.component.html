@@ -21,11 +21,11 @@
       <td>
         <ejs-textbox cssClass="e-outline" formControlName="mobile" [enabled]="editable">
         </ejs-textbox>
-        <uofx-error-tip [control]="mobileCtrl">
+        <uofx-form-error-tip [control]="mobileCtrl">
           <div *ngIf="mobileCtrl?.hasError('minlength') || mobileCtrl?.hasError('invalidMobile')">
             行動電話需有10碼數字
           </div>
-        </uofx-error-tip>
+        </uofx-form-error-tip>
       </td>
     </tr>
     <tr>
@@ -33,11 +33,11 @@
       <td>
         <ejs-datepicker cssClass="e-outline" formControlName="applyDate" [enabled]="editable"
           format="yyyy/MM/dd"></ejs-datepicker>
-        <uofx-error-tip [control]="applyDateCtrl">
+        <uofx-form-error-tip [control]="applyDateCtrl">
           <div *ngIf="applyDateCtrl?.hasError('required') || applyDateCtrl?.hasError('invalidApplyDate')">
             日期必填且不可超出 {{exProps.checkDays}} 天範圍
           </div>
-        </uofx-error-tip>
+        </uofx-form-error-tip>
       </td>
     </tr>
   </table>

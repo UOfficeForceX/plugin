@@ -11,30 +11,30 @@ import { zip } from "rxjs";
  * @returns
  */
 export function createMobileValidator(): ValidatorFn {
-  return (control:AbstractControl) : ValidationErrors | null => {
-      const value = control.value;
-      if (!value) {
-          return null;
-      }
-      //驗證輸入10碼數字
-      const validNumber = /^[0-9]{10}$/.test(value);
-      return !validNumber ? {invalidMobile:true}: null;
+  return (control: AbstractControl): ValidationErrors | null => {
+    const value = control.value;
+    if (!value) {
+      return null;
+    }
+    //驗證輸入10碼數字
+    const validNumber = /^[0-9]{10}$/.test(value);
+    return !validNumber ? { invalidMobile: true } : null;
   }
 }
 
 /**
  * 驗證申請的日期是否超出屬性設定的天數
  */
-export function createApplyDateValidator(days:number): ValidatorFn {
+export function createApplyDateValidator(days: number): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
     const value = control.value;
-    if (!value ) {
+    if (!value) {
       return null;
     }
-    console.log('applyvalue',JSON.stringify( value));
+    console.log('applyvalue', JSON.stringify(value));
     const today = new Date();
     const applyDateVal = new Date(value);
-    if(!applyDateVal)
+    if (!applyDateVal)
       return null;
     const timeDiff = Math.abs(applyDateVal.getTime() - today.getTime());
     const diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
@@ -47,25 +47,25 @@ export function createApplyDateValidator(days:number): ValidatorFn {
 
 
 @Component({
-  selector:'app-advance-field',
-  styleUrls:['./advanced-field.component.scss'],
-  templateUrl:'./advanced-field.component.html'
+  selector: 'app-advance-field',
+  styleUrls: ['./advanced-field.component.scss'],
+  templateUrl: './advanced-field.component.html'
 })
 
-export class AdvancedFieldComponent extends  BpmFwWriteComponent implements OnInit {
-  @Input() exProps:AdvancedFieldExProps;
+export class AdvancedFieldComponent extends BpmFwWriteComponent implements OnInit {
+  @Input() exProps: AdvancedFieldExProps;
   form: UntypedFormGroup;
   value: AdvancedFieldModel;
-  mobileCtrl:UntypedFormControl;
-  applyDateCtrl:UntypedFormControl;
+  mobileCtrl: UntypedFormControl;
+  applyDateCtrl: UntypedFormControl;
   errorMessage = [];
-  account=[];
-  err:any;
-  empNo:string;
-  constructor(private fb:UntypedFormBuilder,
-    private cdr :ChangeDetectorRef,
-    private pluginService:UofxPluginApiService,
-    private empService:EmployeeService){
+  account = [];
+  err: any;
+  empNo: string;
+  constructor(private fb: UntypedFormBuilder,
+    private cdr: ChangeDetectorRef,
+    private pluginService: UofxPluginApiService,
+    private empService: EmployeeService) {
     super();
   }
 
@@ -76,22 +76,22 @@ export class AdvancedFieldComponent extends  BpmFwWriteComponent implements OnIn
     console.log('init');
 
     this.initForm();
-    console.log('empService=',this.empService);
+    console.log('empService=', this.empService);
     this.loadInfo();
     this.form.valueChanges.subscribe(res => {
       console.log('valueChanges', res);
 
-        this.selfControl.setValue(res);
+      this.selfControl.setValue(res);
 
-        // 真正送出欄位值變更的函式
-        this.valueChanges.emit(res);
+      // 真正送出欄位值變更的函式
+      this.valueChanges.emit(res);
 
     });
     this.cdr.detectChanges();
   }
 
-  initForm(){
-    console.log('exProps=',this.exProps);
+  initForm() {
+    console.log('exProps=', this.exProps);
     this.form = this.fb.group({
       'empNo': [this.value?.empNo ?? '', Validators.required],
       'mobile': [this.value?.mobile ?? '', [createMobileValidator(), Validators.minLength(10)]],
@@ -108,7 +108,6 @@ export class AdvancedFieldComponent extends  BpmFwWriteComponent implements OnIn
       this.selfControl.updateValueAndValidity();
     }
   };
-
 
   checkBeforeSubmit(): Promise<boolean> {
     return new Promise(resolve => {
@@ -150,16 +149,16 @@ export class AdvancedFieldComponent extends  BpmFwWriteComponent implements OnIn
   loadInfo() {
     //呼叫api取得員工和公司相關資訊
     zip(
-      this.pluginService.getCorpInfo().toPromise(),
-      this.pluginService.getUserInfo(this.taskNodeInfo.applicantId).toPromise()
+      this.pluginService.getCorpInfo(),
+      this.pluginService.getUserInfo(this.taskNodeInfo.applicantId)
     ).subscribe({
-      next:  ([corpInfo, empInfo])  => {
-        console.log('corpInfo',corpInfo);
+      next: ([corpInfo, empInfo]) => {
+        console.log('corpInfo', corpInfo);
         console.log(empInfo.employeeNumber);
-        if(empInfo.employeeNumber){
-        //取得員工編號
-        this.empNo = empInfo.employeeNumber;
-        this.form.controls.empNo.setValue(this.empNo);
+        if (empInfo.employeeNumber) {
+          //取得員工編號
+          this.empNo = empInfo.employeeNumber;
+          this.form.controls.empNo.setValue(this.empNo);
         }
 
         console.log(this.empNo);

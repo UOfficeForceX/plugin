@@ -156,8 +156,8 @@ export class AdvancedFieldWriteComponent extends BpmFwWriteComponent implements 
   loadInfo() {
     //呼叫api取得員工和公司相關資訊
     zip(
-      this.pluginService.getCorpInfo().toPromise(),
-      this.pluginService.getUserInfo(this.taskNodeInfo.applicantId).toPromise()
+      this.pluginService.getCorpInfo(),
+      this.pluginService.getUserInfo(this.taskNodeInfo.applicantId)
     ).subscribe({
       next: ([corpInfo, empInfo]) => {
         console.log('corpInfo', corpInfo);

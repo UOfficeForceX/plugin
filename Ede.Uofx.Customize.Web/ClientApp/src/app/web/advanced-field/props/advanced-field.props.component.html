@@ -12,11 +12,11 @@
       <span>申請日期範圍</span>&nbsp; &nbsp;
       <ejs-textbox cssClass="e-outline" [readonly]="!mCheck.checked" formControlName="checkDays" width="100">
       </ejs-textbox>
-      <uofx-error-tip [control]="checkDaysCtrl">
+      <uofx-form-error-tip [control]="checkDaysCtrl">
         <div *ngIf="checkDaysCtrl.hasError('required') || checkDaysCtrl.hasError('invalidMobile')">
           請輸入天數
         </div>
-      </uofx-error-tip>
+      </uofx-form-error-tip>
     </div>
   </section>
 </form>
