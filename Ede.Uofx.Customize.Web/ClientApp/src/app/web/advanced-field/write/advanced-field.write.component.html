@@ -10,9 +10,7 @@
       <td>
         <div *ngIf="exProps?.isShowEmpNo">
           <label class="center-align" for="empNo">{{empNo}}</label>
-          <div *ngIf="!empNo && form.controls.invalid">
-            EmpNo必填
-          </div>
+          <uofx-form-error-tip [control]="form.controls.empNo" [requiredText]="'EmpNo必填'"></uofx-form-error-tip>
         </div>
       </td>
     </tr>

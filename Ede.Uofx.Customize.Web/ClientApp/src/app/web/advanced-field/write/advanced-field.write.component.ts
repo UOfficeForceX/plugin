@@ -1,10 +1,22 @@
-import { ChangeDetectorRef, Component, Input, OnInit } from "@angular/core";
-import { AbstractControl, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, ValidationErrors, ValidatorFn, Validators } from "@angular/forms";
-import { AdvancedFieldExProps, AdvancedFieldModel } from "@shared/advanced-field/advanced.exprops-type";
-import { EmployeeService } from "@shared/advanced-field/employee.service";
-import { UofxPluginApiService } from "@uofx/plugin-api";
-import { BpmFwWriteComponent, UofxFormTools } from "@uofx/web-components/form";
-import { zip } from "rxjs";
+import {
+  AbstractControl,
+  UntypedFormBuilder,
+  UntypedFormControl,
+  UntypedFormGroup,
+  ValidationErrors,
+  ValidatorFn,
+  Validators
+  } from '@angular/forms';
+import { AdvancedFieldExProps, AdvancedFieldModel } from '@shared/advanced-field/advanced.exprops-type';
+import { BpmFwWriteComponent, UofxFormTools } from '@uofx/web-components/form';
+import {
+  ChangeDetectorRef,
+  Component,
+  Input,
+  OnInit
+  } from '@angular/core';
+import { EmployeeService } from '@shared/advanced-field/employee.service';
+import { UofxPluginApiService } from '@uofx/plugin-api';
 
 /**
  * 驗證行動電話的格式
@@ -68,10 +80,17 @@ export class AdvancedFieldWriteComponent extends BpmFwWriteComponent implements 
   }
 
   ngOnInit(): void {
+    console.log('Advance field ngOnInit');
     this.initForm();
-    console.log('this.exProps.checkDays', this.exProps.checkDays);
-    console.log(this.value)
+
+    console.log('this.exProps.checkDays:', this.exProps.checkDays);
+    console.log('value:', this.value)
     this.loadInfo();
+
+    console.log('ngOnInit getTargetFieldValue');
+    this.getTargetFieldValue('Reason').then(res => {
+      console.log('Reason', res);
+    })
 
     this.parentForm.statusChanges.subscribe(res => {
 
@@ -105,13 +124,11 @@ export class AdvancedFieldWriteComponent extends BpmFwWriteComponent implements 
       'empNo': [this.value?.empNo ?? '', Validators.required],
       'mobile': [this.value?.mobile ?? '', [createMobileValidator(), Validators.minLength(10)]],
       'applyDate': [this.value?.applyDate, [Validators.required, createApplyDateValidator(this.exProps.checkDays)]]
-    }
-
-    );
+    });
     this.applyDateCtrl = this.form.controls.applyDate as UntypedFormControl;
     this.mobileCtrl = this.form.controls.mobile as UntypedFormControl;
 
-    //表單送出時驗證
+    // 表單送出時驗證
     if (this.selfControl) {
       // 在此便可設定自己的驗證器
       this.selfControl.setValidators(validateSelf(this.form));
@@ -154,35 +171,31 @@ export class AdvancedFieldWriteComponent extends BpmFwWriteComponent implements 
   }
 
   loadInfo() {
-    //呼叫api取得員工和公司相關資訊
-    zip(
-      this.pluginService.getCorpInfo(),
-      this.pluginService.getUserInfo(this.taskNodeInfo.applicantId)
-    ).subscribe({
-      next: ([corpInfo, empInfo]) => {
-        console.log('corpInfo', corpInfo);
-        console.log(empInfo.employeeNumber);
+    // 呼叫api取得員工相關資訊
+    this.pluginService.getUserInfo(this.taskNodeInfo.applicantId).subscribe(
+      empInfo => {
+        console.log('empInfo', empInfo);
         if (empInfo.employeeNumber) {
-          //取得員工編號
+          // 取得員工編號
           this.empNo = empInfo.employeeNumber;
           this.form.controls.empNo.setValue(this.empNo);
+        } else {
+          this.empNo = '申請者未設定員工編號';
         }
-
-        console.log(this.empNo);
       },
-      complete: () => {
-        console.log(this.empNo);
+      () => {
+        this.empNo = '無法取得申請者員工編號';
+      },
+      () => {
+        console.log('empNo', this.empNo);
         // 讓畫面更新
         this.cdr.detectChanges();
       }
-
-    }
-
     );
   }
-
 }
-//BpmFwWriteComponent
+
+// BpmFwWriteComponent
 function validateSelf(form: UntypedFormGroup): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
     return form.valid ? null : { formInvalid: true };
