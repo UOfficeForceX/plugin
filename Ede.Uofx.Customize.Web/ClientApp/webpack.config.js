@@ -58,6 +58,8 @@ module.exports = {
         ...sharedTranslate,
         ...sharedUofxLibraries,
 
+        "@grapecity/gcpdfviewer": { singleton: true, strictVersion: false, requiredVersion: '^3.0.20' },
+
         ...sharedMappings.getDescriptors()
       }
 
