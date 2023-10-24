@@ -1,6 +1,7 @@
 const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
 const mf = require("@angular-architects/module-federation/webpack");
 const path = require("path");
+const manifest = require("./src/plugin.manifest.json");
 const exposes = require("./webpack-exposes.config");
 
 const sharedMappings = new mf.SharedMappings();
@@ -50,7 +51,7 @@ module.exports = {
   plugins: [
     // Web
     new ModuleFederationPlugin({
-      name: 'plugin',
+      name: manifest.code.replace('.', '_'),
       filename: "remoteEntry.js",
       exposes: exposes.web,
       shared: {
@@ -66,7 +67,7 @@ module.exports = {
     }),
     // App
     new ModuleFederationPlugin({
-      name: "pluginApp",
+      name: manifest.code.replace('.', '_') + '_App',
       filename: "remoteEntryApp.js",
       exposes: exposes.app,
       shared: {
