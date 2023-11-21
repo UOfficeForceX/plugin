@@ -2,8 +2,4 @@
 # 這個 .gitignore 檔案由 Microsoft(R) Visual Studio 自動建立。
 ################################################################################
 
-/.vs/Customize/v17
-/.vs
-/Ede.Uofx.Customize.Web/.config/dotnet-tools.json
-/WebApplication1
-node_modules
+.vs
