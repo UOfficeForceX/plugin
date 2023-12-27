@@ -9,7 +9,6 @@ import { HomeComponent } from './develop-lab/home/home.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { IconModule } from './icon.module';
 import { LayoutComponent } from './develop-lab/layout/layout.component';
-import { MenuModule, SidebarModule, ToolbarModule } from '@syncfusion/ej2-angular-navigations';
 import { NavMenuComponent } from './develop-lab/nav-menu/nav-menu.component';
 import { RouterModule } from '@angular/router';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
@@ -35,11 +34,6 @@ const I18NSERVICE_MODULES = [
 
 //#endregion
 
-const EJS_MODULES = [
-  MenuModule,
-  SidebarModule,
-  ToolbarModule,
-];
 
 @NgModule({
   declarations: [
@@ -64,7 +58,6 @@ const EJS_MODULES = [
       }
     ]),
     ...I18NSERVICE_MODULES,
-    ...EJS_MODULES,
     IconModule.forRoot(),
     AdvancedFieldModule,
     HelloWorldModule

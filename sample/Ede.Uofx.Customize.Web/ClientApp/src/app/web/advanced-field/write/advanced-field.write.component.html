@@ -17,8 +17,7 @@
     <tr>
       <th><span uofx-required>行動電話</span></th>
       <td>
-        <ejs-textbox cssClass="e-outline" formControlName="mobile" [enabled]="editable">
-        </ejs-textbox>
+        <input type="text" pInputText formControlName="mobile" [disabled]="!editable" />
         <uofx-form-error-tip [control]="mobileCtrl">
           <div *ngIf="mobileCtrl?.hasError('minlength') || mobileCtrl?.hasError('invalidMobile')">
             行動電話需有10碼數字
@@ -29,8 +28,7 @@
     <tr>
       <th><span uofx-required>申請日期</span></th>
       <td>
-        <ejs-datepicker cssClass="e-outline" formControlName="applyDate" [enabled]="editable"
-          format="yyyy/MM/dd"></ejs-datepicker>
+        <p-calendar dateFormat="dd.mm.yy" formControlName="applyDate" [disabled]="!editable"></p-calendar>
         <uofx-form-error-tip [control]="applyDateCtrl">
           <div *ngIf="applyDateCtrl?.hasError('required') || applyDateCtrl?.hasError('invalidApplyDate')">
             日期必填且不可超出 {{exProps.checkDays}} 天範圍

@@ -1,17 +1,16 @@
 <form [formGroup]="form">
   <section class="padding-horizontal-2x">
     <div class="margin-vertical-2x">
-      <ejs-checkbox formControlName="isShowEmpNo" label="顯示員工編號" [disabled]="!editable">
-      </ejs-checkbox>
+      <p-checkbox formControlName="isShowEmpNo" inputId="isShowEmpNo" [disabled]="!editable"></p-checkbox>
+      <label for="isShowEmpNo">顯示員工編號</label>
     </div>
     <div class="margin-vertical-2x">
-      <ejs-checkbox formControlName="isCheckDate" #mCheck label="檢查申請日期符合區間" [disabled]="!editable">
-      </ejs-checkbox>
+      <p-checkbox formControlName="isCheckDate" #mCheck inputId="isCheckDate" [disabled]="!editable"></p-checkbox>
+      <label for="isCheckDate">檢查申請日期符合區間</label>
     </div>
     <div class="margin-vertical-2x">
       <span>申請日期範圍</span>&nbsp; &nbsp;
-      <ejs-textbox cssClass="e-outline" [readonly]="!mCheck.checked" formControlName="checkDays" width="100">
-      </ejs-textbox>
+      <input type="text" pInputText formControlName="checkDays" [disabled]="!mCheck.checked" />
       <uofx-form-error-tip [control]="checkDaysCtrl">
         <div *ngIf="checkDaysCtrl.hasError('required') || checkDaysCtrl.hasError('invalidMobile')">
           請輸入天數

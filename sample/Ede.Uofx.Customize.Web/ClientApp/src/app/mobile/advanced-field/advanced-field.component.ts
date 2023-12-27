@@ -4,7 +4,7 @@ import { AdvancedFieldExProps, AdvancedFieldModel } from "@shared/advanced-field
 import { EmployeeService } from "@shared/advanced-field/employee.service";
 import { BpmFwWriteComponent } from '@uofx/app-components/form';
 import { UofxPluginApiService } from "@uofx/plugin-api";
-import { zip } from "rxjs";
+import { switchMap, zip } from "rxjs";
 
 /**
  * 驗證行動電話的格式
@@ -147,32 +147,37 @@ export class AdvancedFieldComponent extends BpmFwWriteComponent implements OnIni
   }
 
   loadInfo() {
-    //呼叫api取得員工和公司相關資訊
-    zip(
-      this.pluginService.getCorpInfo(),
-      this.pluginService.getUserInfo(this.taskNodeInfo.applicantId)
-    ).subscribe({
-      next: ([corpInfo, empInfo]) => {
-        console.log('corpInfo', corpInfo);
-        console.log(empInfo.employeeNumber);
-        if (empInfo.employeeNumber) {
-          //取得員工編號
-          this.empNo = empInfo.employeeNumber;
-          this.form.controls.empNo.setValue(this.empNo);
+    // 呼叫api取得員工相關資訊
+    this.pluginService.getUserInfo(this.taskNodeInfo.applicantId)
+      .pipe(
+        switchMap(empInfo => {
+          return this.pluginService.getCorpInfo()
+        })
+      ).subscribe({
+        next: (empInfo) => {
+          // console.log('empInfo', empInfo);
+          // if (empInfo.employeeNumber) {
+          //   // 取得員工編號
+          //   this.empNo = empInfo.employeeNumber;
+          //   this.form.controls.empNo.setValue(this.empNo);
+          // } else {
+          //   this.empNo = '申請者未設定員工編號';
+          // }
+        },
+        error: () => {
+          this.empNo = '無法取得申請者員工編號';
+          this.empNo = 'A001';
+          this.form.controls.empNo.setValue('A001');
+        },
+        complete: () => {
+          console.log('empNo', this.empNo);
+          // 讓畫面更新
+          this.cdr.detectChanges();
+          return Promise.resolve(true);
         }
+      });
 
-        console.log(this.empNo);
-      },
-      complete: () => {
-        console.log(this.empNo);
-        // 讓畫面更新
-        this.cdr.detectChanges();
-      }
-
-    }
-
-    );
-  }
+  };
 }
 //BpmFwWriteComponent
 function validateSelf(form: UntypedFormGroup): ValidatorFn {

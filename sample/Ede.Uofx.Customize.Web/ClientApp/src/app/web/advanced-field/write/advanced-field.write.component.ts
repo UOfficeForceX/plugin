@@ -6,7 +6,7 @@ import {
   ValidationErrors,
   ValidatorFn,
   Validators
-  } from '@angular/forms';
+} from '@angular/forms';
 import { AdvancedFieldExProps, AdvancedFieldModel } from '@shared/advanced-field/advanced.exprops-type';
 import { BpmFwWriteComponent, UofxFormTools } from '@uofx/web-components/form';
 import {
@@ -14,9 +14,10 @@ import {
   Component,
   Input,
   OnInit
-  } from '@angular/core';
+} from '@angular/core';
 import { EmployeeService } from '@shared/advanced-field/employee.service';
 import { UofxPluginApiService } from '@uofx/plugin-api';
+import { switchMap } from 'rxjs';
 
 /**
  * 驗證行動電話的格式
@@ -85,6 +86,7 @@ export class AdvancedFieldWriteComponent extends BpmFwWriteComponent implements 
 
     console.log('this.exProps.checkDays:', this.exProps.checkDays);
     console.log('value:', this.value)
+    console.log('variables:', this.variables)
     this.loadInfo();
 
     console.log('ngOnInit getTargetFieldValue');
@@ -99,6 +101,7 @@ export class AdvancedFieldWriteComponent extends BpmFwWriteComponent implements 
           Object.keys(this.form.controls).forEach(key => {
             this.tools.markFormControl(this.form.get(key));
           });
+          this.form.markAllAsTouched();
           this.form.markAsDirty();
           //強制formgroup驗證狀態
           //this.tools.markFormGroup(this.form);
@@ -172,26 +175,34 @@ export class AdvancedFieldWriteComponent extends BpmFwWriteComponent implements 
 
   loadInfo() {
     // 呼叫api取得員工相關資訊
-    this.pluginService.getUserInfo(this.taskNodeInfo.applicantId).subscribe(
-      empInfo => {
-        console.log('empInfo', empInfo);
-        if (empInfo.employeeNumber) {
-          // 取得員工編號
-          this.empNo = empInfo.employeeNumber;
-          this.form.controls.empNo.setValue(this.empNo);
-        } else {
-          this.empNo = '申請者未設定員工編號';
+    this.pluginService.getUserInfo(this.taskNodeInfo.applicantId)
+      .pipe(
+        switchMap(empInfo => {
+          return this.pluginService.getCorpInfo()
+        })
+      ).subscribe({
+        next: (empInfo) => {
+          // console.log('empInfo', empInfo);
+          // if (empInfo.employeeNumber) {
+          //   // 取得員工編號
+          //   this.empNo = empInfo.employeeNumber;
+          //   this.form.controls.empNo.setValue(this.empNo);
+          // } else {
+          //   this.empNo = '申請者未設定員工編號';
+          // }
+        },
+        error: () => {
+          this.empNo = '無法取得申請者員工編號';
+          this.empNo = 'A001';
+          this.form.controls.empNo.setValue('A001');
+        },
+        complete: () => {
+          console.log('empNo', this.empNo);
+          // 讓畫面更新
+          this.cdr.detectChanges();
+          return Promise.resolve(true);
         }
-      },
-      () => {
-        this.empNo = '無法取得申請者員工編號';
-      },
-      () => {
-        console.log('empNo', this.empNo);
-        // 讓畫面更新
-        this.cdr.detectChanges();
-      }
-    );
+      });
   }
 }
 
