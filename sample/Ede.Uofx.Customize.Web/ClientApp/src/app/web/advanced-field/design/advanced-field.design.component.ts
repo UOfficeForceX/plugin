@@ -1,5 +1,4 @@
 import { Component, Input } from "@angular/core";
-import { UofxButtonMode } from "@uofx/web-components/button";
 import { BpmFwDesignComponent } from "@uofx/web-components/form";
 
 @Component({
@@ -11,7 +10,5 @@ import { BpmFwDesignComponent } from "@uofx/web-components/form";
 export class AdvancedFieldDesignComponent extends BpmFwDesignComponent {
 
   @Input() exProps: any;
-
-  buttonMode = UofxButtonMode;
 
 }
