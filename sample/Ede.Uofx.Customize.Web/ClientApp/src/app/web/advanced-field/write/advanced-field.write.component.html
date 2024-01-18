@@ -7,7 +7,7 @@
   <table [formGroup]="form">
     <tr>
       <th><span uofx-required>員工編號</span></th>
-      <td>
+      <td colspan="3">
         <div *ngIf="exProps?.isShowEmpNo">
           <label class="center-align" for="empNo">{{empNo}}</label>
           <uofx-form-error-tip [control]="form.controls.empNo" [requiredText]="'EmpNo必填'"></uofx-form-error-tip>
@@ -24,16 +24,20 @@
           </div>
         </uofx-form-error-tip>
       </td>
-    </tr>
-    <tr>
       <th><span uofx-required>申請日期</span></th>
       <td>
-        <p-calendar dateFormat="dd.mm.yy" formControlName="applyDate" [disabled]="!editable"></p-calendar>
+        <p-calendar appendTo="body" dateFormat="dd.mm.yy" formControlName="applyDate" [disabled]="!editable"></p-calendar>
         <uofx-form-error-tip [control]="applyDateCtrl">
           <div *ngIf="applyDateCtrl?.hasError('required') || applyDateCtrl?.hasError('invalidApplyDate')">
             日期必填且不可超出 {{exProps.checkDays}} 天範圍
           </div>
         </uofx-form-error-tip>
+      </td>
+    </tr>
+    <tr>
+      <th><span>職務代理人</span></th>
+      <td colspan="3">
+        <uofx-user-select [corpId]="corpId"></uofx-user-select>
       </td>
     </tr>
   </table>

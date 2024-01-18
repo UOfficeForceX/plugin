@@ -1,3 +1,4 @@
+import { UofxToastController, UofxToastModule } from '@uofx/web-components/toast';
 import {
   AbstractControl,
   UntypedFormBuilder,
@@ -18,6 +19,7 @@ import {
 import { EmployeeService } from '@shared/advanced-field/employee.service';
 import { UofxPluginApiService } from '@uofx/plugin-api';
 import { switchMap } from 'rxjs';
+import { Settings } from '@uofx/core';
 
 /**
  * 驗證行動電話的格式
@@ -68,6 +70,8 @@ export class AdvancedFieldWriteComponent extends BpmFwWriteComponent implements 
   value: AdvancedFieldModel;
   @Input() exProps: AdvancedFieldExProps;
 
+  corpId = Settings.UserInfo.corpId;
+
   errorMessage = [];
   empNo: string;
   applyDateCtrl: UntypedFormControl;
@@ -76,11 +80,15 @@ export class AdvancedFieldWriteComponent extends BpmFwWriteComponent implements 
     private tools: UofxFormTools,
     private cdr: ChangeDetectorRef,
     private pluginService: UofxPluginApiService,
-    private empService: EmployeeService) {
+    private empService: EmployeeService,
+    private toastCtrl: UofxToastController,
+
+  ) {
     super();
   }
 
   ngOnInit(): void {
+    this.toastCtrl.saved();
     console.log('Advance field ngOnInit');
     this.initForm();
 

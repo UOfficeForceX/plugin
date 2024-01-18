@@ -17,9 +17,12 @@ const sharedAngular = {
   "@angular/router": { singleton: true, requiredVersion: '^16.0.0' },
 };
 
-const sharedTranslate = {
+const sharedThird = {
   "@ngx-translate/core": { singleton: true, requiredVersion: '^15.0.0' },
   "@ngx-translate/http-loader": { singleton: true, requiredVersion: '^8.0.0' },
+  "primeng": { singleton: true, strictVersion: false, requiredVersion: 'auto' },
+  "primeng/api": { singleton: true, strictVersion: false, requiredVersion: 'auto' },
+  "primeng/utils": { singleton: true, strictVersion: false, requiredVersion: 'auto' },
 };
 
 const sharedUofxLibraries = {
@@ -56,10 +59,8 @@ module.exports = {
       exposes: exposes.web,
       shared: {
         ...sharedAngular,
-        ...sharedTranslate,
+        ...sharedThird,
         ...sharedUofxLibraries,
-
-        "@grapecity/gcpdfviewer": { singleton: true, strictVersion: false, requiredVersion: '^3.0.20' },
 
         ...sharedMappings.getDescriptors()
       }
@@ -72,7 +73,7 @@ module.exports = {
       exposes: exposes.app,
       shared: {
         ...sharedAngular,
-        ...sharedTranslate,
+        ...sharedThird,
         ...sharedUofxLibraries,
 
         "@uofx/app-native": { singleton: true, strictVersion: false, requiredVersion: '^1.1.3' },

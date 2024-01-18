@@ -7,9 +7,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 
-
-const EJS_MODULES = [];
-
 const UOF_MODULES = [
   UofxFormFieldBaseModule,
 ];
@@ -20,7 +17,6 @@ const COMPONENTS = [
 ];
 
 const BASIC_SERVICES = [];
-
 
 @NgModule({
   imports: [
@@ -37,7 +33,6 @@ const BASIC_SERVICES = [];
       }
     ]),
     TranslateModule.forChild(),
-    ...EJS_MODULES,
     ...UOF_MODULES
   ],
   providers: [

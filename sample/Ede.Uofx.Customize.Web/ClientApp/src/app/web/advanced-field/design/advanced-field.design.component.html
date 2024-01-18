@@ -3,39 +3,26 @@
   </uofx-form-field-name>
 </div>
 <div class="fw-control">
-  <tr>
-    <th><span uofx-required>基本資料</span>
-    </th>
-    <td colspan="3"></td>
-  </tr>
   <table>
     <tr>
-      <th><span uofx-required>Advanced-Field Design model~ </span>
-      </th>
-      <td colspan="3"></td>
+      <th><span uofx-required>員工編號</span></th>
+      <td colspan="3">88888888</td>
     </tr>
     <tr>
+      <th><span uofx-required>行動電話</span></th>
       <td>
-        <span>員工名稱</span>
-        <label for="lblEmpName"></label>
+        <input type="text" pInputText />
       </td>
-      <td colspan="2">
-        <span>員工編號</span>
-        <label for="lblEmpno"></label>
-      </td>
-    </tr>
-    <tr>
-      <td colspan="3">
-        <span uofx-required>行動電話</span>
-        <span>0988123456</span>
+      <th><span uofx-required>申請日期</span></th>
+      <td>
+        <p-calendar dateFormat="dd.mm.yy"></p-calendar>
       </td>
     </tr>
     <tr>
+      <th><span>職務代理人</span></th>
       <td colspan="3">
-        <span uofx-required>申請日期</span>
-        <span>2023/12/1</span>
+        <uofx-user-select [corpId]="corpId" [multiple]="false" [types]="[2]"></uofx-user-select>
       </td>
     </tr>
-
   </table>
 </div>

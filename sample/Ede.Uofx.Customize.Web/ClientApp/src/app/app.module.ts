@@ -9,11 +9,11 @@ import { HomeComponent } from './develop-lab/home/home.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { IconModule } from './icon.module';
 import { LayoutComponent } from './develop-lab/layout/layout.component';
+import { MessageService } from 'primeng/api';
 import { NavMenuComponent } from './develop-lab/nav-menu/nav-menu.component';
 import { RouterModule } from '@angular/router';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { UofxTranslateLoader } from './translate-loader';
-
 
 // #region i18n services
 export function I18nHttpLoaderFactory(http: HttpClient) {
@@ -63,7 +63,8 @@ const I18NSERVICE_MODULES = [
     HelloWorldModule
   ],
   providers: [
-    { provide: 'BASE_HREF', useFactory: Helper.getBaseHref }
+    { provide: 'BASE_HREF', useFactory: Helper.getBaseHref },
+    MessageService,
   ],
   bootstrap: [AppComponent],
   schemas: [
