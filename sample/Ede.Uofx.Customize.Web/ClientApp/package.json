@@ -44,7 +44,7 @@
     "ng-inline-svg-2": "^15.0.1",
     "ngx-image-cropper": "^7.0.2",
     "oidc-client": "^1.11.5",
-    "primeng": "^16.9.1",
+    "primeng": "^16.5.1",
     "run-script-os": "^1.1.6",
     "rxjs": "^7.8.1",
     "tslib": "^2.6.1",
