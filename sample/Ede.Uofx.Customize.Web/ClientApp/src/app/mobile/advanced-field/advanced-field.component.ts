@@ -1,10 +1,23 @@
-import { ChangeDetectorRef, Component, Input, OnInit } from "@angular/core";
-import { AbstractControl, UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, ValidationErrors, ValidatorFn, Validators } from "@angular/forms";
-import { AdvancedFieldExProps, AdvancedFieldModel } from "@shared/advanced-field/advanced.exprops-type";
-import { EmployeeService } from "@shared/advanced-field/employee.service";
+import {
+  AbstractControl,
+  UntypedFormBuilder,
+  UntypedFormControl,
+  UntypedFormGroup,
+  ValidationErrors,
+  ValidatorFn,
+  Validators
+  } from '@angular/forms';
+import { AdvancedFieldExProps, AdvancedFieldModel } from '@shared/advanced-field/advanced.exprops-type';
 import { BpmFwWriteComponent } from '@uofx/app-components/form';
-import { UofxPluginApiService } from "@uofx/plugin-api";
-import { switchMap, zip } from "rxjs";
+import {
+  ChangeDetectorRef,
+  Component,
+  Input,
+  OnInit
+  } from '@angular/core';
+import { EmployeeService } from '@shared/advanced-field/employee.service';
+import { switchMap, zip } from 'rxjs';
+import { UofxPluginApiService } from '@uofx/plugin/api';
 
 /**
  * 驗證行動電話的格式

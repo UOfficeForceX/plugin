@@ -17,11 +17,10 @@ import { UofxButtonModule } from '@uofx/web-components/button';
 import { UofxDialogModule } from '@uofx/web-components/dialog';
 import { UofxFormFieldBaseModule, UofxFormModule } from '@uofx/web-components/form';
 import { UofxIconModule } from '@uofx/web-components/icon';
-import { UofxPluginApiService } from '@uofx/plugin-api';
-import { UofxToastController, UofxToastModule } from '@uofx/web-components/toast';
+import { UofxPluginApiService } from '@uofx/plugin/api';
+import { UofxToastModule } from '@uofx/web-components/toast';
 import { UofxTranslateModule } from '@uofx/web-components';
 import { UofxUserSelectModule } from '@uofx/web-components/user-select';
-import { MessageService } from 'primeng/api';
 
 const PRIMENG_MODULES = [
   ButtonModule,

@@ -1,4 +1,3 @@
-import { UofxToastController, UofxToastModule } from '@uofx/web-components/toast';
 import {
   AbstractControl,
   UntypedFormBuilder,
@@ -7,7 +6,7 @@ import {
   ValidationErrors,
   ValidatorFn,
   Validators
-} from '@angular/forms';
+  } from '@angular/forms';
 import { AdvancedFieldExProps, AdvancedFieldModel } from '@shared/advanced-field/advanced.exprops-type';
 import { BpmFwWriteComponent, UofxFormTools } from '@uofx/web-components/form';
 import {
@@ -15,11 +14,12 @@ import {
   Component,
   Input,
   OnInit
-} from '@angular/core';
+  } from '@angular/core';
 import { EmployeeService } from '@shared/advanced-field/employee.service';
-import { UofxPluginApiService } from '@uofx/plugin-api';
-import { switchMap } from 'rxjs';
 import { Settings } from '@uofx/core';
+import { switchMap } from 'rxjs';
+import { UofxPluginApiService } from '@uofx/plugin/api';
+import { UofxToastController, UofxToastModule } from '@uofx/web-components/toast';
 
 /**
  * 驗證行動電話的格式
@@ -94,7 +94,7 @@ export class AdvancedFieldWriteComponent extends BpmFwWriteComponent implements 
 
     console.log('this.exProps.checkDays:', this.exProps.checkDays);
     console.log('value:', this.value)
-    console.log('variables:', this.variables)
+    console.log('variables:', this.taskNodeInfo.variables)
     this.loadInfo();
 
     console.log('ngOnInit getTargetFieldValue');
