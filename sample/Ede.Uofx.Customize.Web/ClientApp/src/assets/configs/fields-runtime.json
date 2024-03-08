@@ -1,4 +1,5 @@
 {
+  "$schema": "../../../node_modules/@uofx/plugin/schema/fields-runtime.schema.json",
   "sampleField": {
     "exposedModule": "./HelloWorld",
     "moduleName": "HelloWorldModule",
