@@ -29,6 +29,7 @@
             "assets": [
               "src/favicon.ico",
               "src/plugin.manifest.json",
+              "src/plugin.versions.json",
               "src/assets",
               {
                 "glob": "*.svg",
