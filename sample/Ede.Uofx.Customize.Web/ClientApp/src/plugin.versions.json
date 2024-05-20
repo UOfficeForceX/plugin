@@ -2,21 +2,6 @@
   "$schema": "../node_modules/@uofx/plugin/schema/plugin-versions.schema.json",
   "versions": [
     {
-      "version": "3.0",
-      "minimumUOFXVersion": "2.92",
-      "changelog": [
-        "新增了2個欄位",
-        "修正了一些錯誤"
-      ]
-    },
-    {
-      "version": "2.0",
-      "minimumUOFXVersion": "2.90",
-      "changelog": [
-        "本次更新除掉了幾條蟲"
-      ]
-    },
-    {
       "version": "1.0",
       "minimumUOFXVersion": "2.89",
       "changelog": [

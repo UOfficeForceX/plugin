@@ -122,7 +122,13 @@ export class AdvancedFieldComponent extends BpmFwWriteComponent implements OnIni
     }
   };
 
-  checkBeforeSubmit(): Promise<boolean> {
+  /**
+   * 表單送出前會呼叫此函式做檢查
+   * @param {boolean} checkValidator 按下表單下方按鈕時是否要檢查表單驗證
+   * @return {*}  {Promise<boolean>}
+   * @memberof AdvancedFieldComponent
+   */
+  checkBeforeSubmit(checkValidator: boolean): Promise<boolean> {
     return new Promise(resolve => {
       const value = this.form.value;
       console.log(value);
