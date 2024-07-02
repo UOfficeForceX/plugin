@@ -21,6 +21,8 @@ import { UofxPluginApiService } from '@uofx/plugin/api';
 import { UofxToastModule } from '@uofx/web-components/toast';
 import { UofxTranslateModule } from '@uofx/web-components';
 import { UofxUserSelectModule } from '@uofx/web-components/user-select';
+import { UofxDatePickerModule } from '@uofx/web-components/date-picker';
+import { UofxPipeModule } from '@uofx/web-components/pipes';
 
 const PRIMENG_MODULES = [
   ButtonModule,
@@ -34,11 +36,12 @@ const UOF_MODULES = [
   UofxFormFieldBaseModule,
   UofxFormModule,
   UofxIconModule,
-  // UofxSelectModule,
   UofxToastModule,
   UofxTranslateModule,
   UofxUserSelectModule,
   UofxButtonModule,
+  UofxDatePickerModule,
+  UofxPipeModule
 ];
 
 const COMPONENTS = [
@@ -80,6 +83,7 @@ const EMP_SERVICES = [
   exports: [...COMPONENTS],
   declarations: [...COMPONENTS]
 })
+
 export class AdvancedFieldModule {
   static comp = {
     props: AdvancedFieldPropsComponent,

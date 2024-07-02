@@ -5,23 +5,32 @@
 <div class="fw-control">
   <table>
     <tr>
+      <th><span>帳號</span></th>
+      <td colspan="3">
+        <span></span>
+      </td>
+    </tr>
+    <tr *ngIf="exProps?.isShowEmpNo">
       <th><span uofx-required>員工編號</span></th>
-      <td colspan="3">88888888</td>
+      <td colspan="3">
+          <input type="text" pInputText  />
+          <span class="margin-left">合法員編為:A001、A002</span>
+      </td>
     </tr>
     <tr>
       <th><span uofx-required>行動電話</span></th>
       <td>
-        <input type="text" pInputText />
+        <input type="text" pInputText [disabled]="!editable" />
       </td>
       <th><span uofx-required>申請日期</span></th>
       <td>
-        <p-calendar dateFormat="dd.mm.yy"></p-calendar>
+        <uofx-date-picker></uofx-date-picker>
       </td>
     </tr>
     <tr>
-      <th><span>職務代理人</span></th>
+      <th><span uofx-required>職務代理人</span></th>
       <td colspan="3">
-        <uofx-user-select [corpId]="corpId" [multiple]="false" [types]="[2]"></uofx-user-select>
+        <uofx-user-select></uofx-user-select>
       </td>
     </tr>
   </table>

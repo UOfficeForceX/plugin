@@ -9,7 +9,7 @@ export const BASIC_HTTP_HANDLER = new InjectionToken<HttpHandler>('BASIC_HTTP_HA
 export class BasicHttpHandler implements HttpHandler {
   constructor(protected next: HttpHandler) { }
   serverUrl: string;
-  handle(req: HttpRequest<any>): Observable<HttpEvent<any>>{
+  handle(req: HttpRequest<any>): Observable<HttpEvent<any>> {
     // 檢查 Server Url
     if (this.serverUrl) {
       // 重設請求
@@ -42,15 +42,15 @@ export class EmployeeHttpHandler extends BasicHttpHandler {
   }
 
 
-    /** 設定 Http Request Header  */
-    private setSignatureHeader(): HttpHeaders {
-      const message = new Date().toISOString();
-      const apiKey = "SampleAdvanced" ;
-      const signature = CryptoJS.HmacSHA256(message, apiKey).toString();
+  /** 設定 Http Request Header  */
+  private setSignatureHeader(): HttpHeaders {
+    const message = new Date().toISOString();
+    const apiKey = "SampleAdvanced";
+    const signature = CryptoJS.HmacSHA256(message, apiKey).toString();
 
-      return new HttpHeaders({
-        'X-Timestamp': message,
-        'X-signature': signature,
-      });
-    }
+    return new HttpHeaders({
+      'X-Timestamp': message,
+      'X-signature': signature,
+    });
+  }
 }

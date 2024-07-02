@@ -11,8 +11,8 @@ export class IconModule {
     return {
       ngModule: IconModule,
       providers: [
-        {provide: UofxIconBaseService, useValue: iconService }
+        { provide: UofxIconBaseService, useValue: iconService }
       ]
     };
   }
- }
+}

@@ -5,6 +5,7 @@
 }
 
 $border: .55px solid #CFD2D9;
+
 :host {
   ::ng-deep {
     .fw-control {
@@ -13,7 +14,8 @@ $border: .55px solid #CFD2D9;
         border-left: $border;
       }
 
-      td, th {
+      td,
+      th {
         padding: 4px 12px !important;
         font-size: 1.5rem;
         border-top: none;

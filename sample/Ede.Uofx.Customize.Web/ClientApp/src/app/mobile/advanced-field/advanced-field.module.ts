@@ -14,47 +14,45 @@ import {
   UofxErrorBlockModule,
   UofxErrorTipModule,
   UofxFormFieldBaseModule
-  } from '@uofx/app-components/form';
+} from '@uofx/app-components/form';
 import { UofxModalModule } from '@uofx/app-components/modal';
 import { UofxPluginApiService } from '@uofx/plugin/api';
 import { UofxTranslateModule } from '@uofx/app-components';
 import { UofxUserSelectModule } from '@uofx/app-components/user-select';
 
-
-const COMPONENTS=[AdvancedFieldComponent];
+const COMPONENTS = [AdvancedFieldComponent];
 
 @NgModule({
-  imports:[CommonModule,
-          FormsModule,
-          ReactiveFormsModule,
-          RouterModule.forChild([
-            {path:'',component: AdvancedFieldComponent,pathMatch:'full'}
-          ]),
-          TranslateModule.forChild(),
-
-          IonicModule,
-          UofxAvatarModule,
-          UofxDatePickerModule,
-          UofxErrorBlockModule,
-          UofxErrorTipModule,
-          UofxFormFieldBaseModule,
-          UofxModalModule,
-          UofxTranslateModule,
-          UofxUserSelectModule,
-        ],
-        providers: [
-          UofxPluginApiService,
-          { provide: BASIC_HTTP_HANDLER, useClass: EmployeeHttpHandler },
-          BasicHttpClient,
-          EmployeeService
-        ],
-  exports:[...COMPONENTS],
-  schemas:[CUSTOM_ELEMENTS_SCHEMA],
-  declarations:[...COMPONENTS]
+  imports: [CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    RouterModule.forChild([
+      { path: '', component: AdvancedFieldComponent, pathMatch: 'full' }
+    ]),
+    TranslateModule.forChild(),
+    IonicModule,
+    UofxAvatarModule,
+    UofxDatePickerModule,
+    UofxErrorBlockModule,
+    UofxErrorTipModule,
+    UofxFormFieldBaseModule,
+    UofxModalModule,
+    UofxTranslateModule,
+    UofxUserSelectModule,
+  ],
+  providers: [
+    UofxPluginApiService,
+    { provide: BASIC_HTTP_HANDLER, useClass: EmployeeHttpHandler },
+    BasicHttpClient,
+    EmployeeService
+  ],
+  exports: [...COMPONENTS],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  declarations: [...COMPONENTS]
 })
-export class FieldAdvancedAppModule{
+export class FieldAdvancedAppModule {
   static comp = {
-    write:AdvancedFieldComponent,
+    write: AdvancedFieldComponent,
     view: AdvancedFieldComponent
   }
 }

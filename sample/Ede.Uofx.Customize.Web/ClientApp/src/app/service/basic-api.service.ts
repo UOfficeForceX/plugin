@@ -1,16 +1,16 @@
 import { HttpEvent, HttpHandler, HttpRequest } from '@angular/common/http';
 import { BasicHttpClient } from './basic-http-client';
-import { Injectable, InjectionToken } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Helper, UofxConsole } from '@uofx/core';
 
-
-
 @Injectable()
+
 export class CusHttpHandler implements HttpHandler {
   constructor(protected next: HttpHandler) { }
   serverUrl: string;
-  handle(req: HttpRequest<any>): Observable<HttpEvent<any>>{
+
+  handle(req: HttpRequest<any>): Observable<HttpEvent<any>> {
     // 檢查 Server Url
     if (this.serverUrl) {
       // 重設 Header 和 Url
@@ -23,6 +23,7 @@ export class CusHttpHandler implements HttpHandler {
     return this.next.handle(req);
   }
 }
+
 /**
  * 自訂的 API 需要獨立存取，Service 需繼承 BasicApiService，使用額外定義的 Http Client 發送請求。
  * @class BasicApiService

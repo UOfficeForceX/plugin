@@ -41,6 +41,7 @@ const BASIC_SERVICES = [];
   exports: [...COMPONENTS],
   declarations: [...COMPONENTS]
 })
+
 export class HelloWorldModule {
   static comp = {
     props: HelloWorldPropsComponent,

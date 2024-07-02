@@ -6,15 +6,15 @@ import {
   ValidationErrors,
   ValidatorFn,
   Validators
-  } from '@angular/forms';
+} from '@angular/forms';
 import { AdvancedFieldExProps } from '@shared/advanced-field/advanced.exprops-type';
-import { BpmFwPropsComponent, UofxFormTools } from '@uofx/web-components/form';
+import { BpmFwPropsComponent } from '@uofx/web-components/form';
 import {
   ChangeDetectorRef,
   Component,
   Input,
   OnInit
-  } from '@angular/core';
+} from '@angular/core';
 import { createNumberValidatorValidator } from './numberValidator';
 
 @Component({
@@ -25,9 +25,11 @@ export class AdvancedFieldPropsComponent extends BpmFwPropsComponent implements 
 
   @Input() exProps: AdvancedFieldExProps;
   checkDaysCtrl: UntypedFormControl;
-  constructor(public fb: UntypedFormBuilder,
-    private tools: UofxFormTools,
-    private cdr: ChangeDetectorRef) {
+
+  constructor(
+    public fb: UntypedFormBuilder,
+    private cdr: ChangeDetectorRef
+  ) {
 
     super(fb);
     console.log('constructor');
@@ -50,16 +52,15 @@ export class AdvancedFieldPropsComponent extends BpmFwPropsComponent implements 
     this.cdr.detectChanges();
   }
 
+  /** 初始化form */
   initForm() {
     console.log('initForm');
-    // Object.keys(this.exProps).forEach(k => {
-    //   this.addFormControl(k, null);
-    // });
+
     this.addFormControl('isShowEmpNo', [Validators.required]);
     this.addFormControl('isCheckDate', null);
-    this.addFormControl('checkDays', [Validators.required],
-      [createNumberValidatorValidator()]);
+    this.addFormControl('checkDays', [Validators.required], [createNumberValidatorValidator()]);
     this.checkDaysCtrl = this.form.controls.checkDays as UntypedFormControl;
+
     if (this.selfControl) {
       this.selfControl.setValidators(validateSelf(this.form));
       this.selfControl.updateValueAndValidity();
@@ -67,9 +68,20 @@ export class AdvancedFieldPropsComponent extends BpmFwPropsComponent implements 
     console.log(`exProps= ${JSON.stringify(this.exProps)} `);
 
     this.form.setValue(this.exProps);
+    this.setControlStatus();
   }
 
+  /** 設定控制項狀態 */
+  setControlStatus() {
+    if(this.editable) {
+      this.form.enable();
+    }
+    else {
+      this.form.disable();
+    }
+  }
 
+  /** 初始化屬性 */
   initExProps() {
     console.log('initExProps');
     if (!this.exProps) {
@@ -79,20 +91,15 @@ export class AdvancedFieldPropsComponent extends BpmFwPropsComponent implements 
         isCheckDate: false,
         checkDays: 0
       };
-
-
     } else {
       // 若已有存在的 exProps
       // 看是需要更新還是重設 value
     }
-
   }
-
-
 }
+
 function validateSelf(form: UntypedFormGroup): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
     return form.valid ? null : { formInvalid: true };
   }
 }
-

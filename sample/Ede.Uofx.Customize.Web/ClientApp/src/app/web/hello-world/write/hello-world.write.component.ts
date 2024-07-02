@@ -2,7 +2,7 @@ import { Component, } from "@angular/core";
 import { BpmFwWriteComponent } from "@uofx/web-components/form";
 
 @Component({
-  selector: 'uofx-hello-world-write-component',
+  selector: 'uofx-hello-world-write',
   template: `
     <div>
       <uofx-form-field-name [name]="name" [required]="required">
@@ -16,6 +16,7 @@ import { BpmFwWriteComponent } from "@uofx/web-components/form";
     </div>
   `
 })
+
 export class HelloWorldWriteComponent extends BpmFwWriteComponent {
   label: string = '🎉Hello World';
 }

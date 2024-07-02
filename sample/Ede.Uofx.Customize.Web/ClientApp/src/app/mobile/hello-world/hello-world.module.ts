@@ -26,7 +26,6 @@ const COMPONENTS = [
     ]),
     TranslateModule.forChild(),
     IonicModule,
-
     ...UOF_MODULES,
   ],
   providers: [UofxPluginApiService],
@@ -34,6 +33,7 @@ const COMPONENTS = [
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   declarations: [...COMPONENTS]
 })
+
 export class FieldHelloWorldAppModule {
   static comp = {
     write: HelloWorldComponent,

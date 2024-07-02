@@ -1,25 +1,23 @@
 import {
   AbstractControl,
   UntypedFormBuilder,
-  UntypedFormControl,
   UntypedFormGroup,
   ValidationErrors,
   ValidatorFn,
   Validators
-  } from '@angular/forms';
+} from '@angular/forms';
 import { AdvancedFieldExProps, AdvancedFieldModel } from '@shared/advanced-field/advanced.exprops-type';
-import { BpmFwWriteComponent, UofxFormTools } from '@uofx/web-components/form';
+import { BpmFwWriteComponent, UofxFormFieldLogic, UofxFormTools, UofxValidators } from '@uofx/web-components/form';
 import {
-  ChangeDetectorRef,
   Component,
   Input,
   OnInit
-  } from '@angular/core';
+} from '@angular/core';
 import { EmployeeService } from '@shared/advanced-field/employee.service';
 import { Settings } from '@uofx/core';
-import { switchMap } from 'rxjs';
 import { UofxPluginApiService } from '@uofx/plugin/api';
-import { UofxToastController, UofxToastModule } from '@uofx/web-components/toast';
+import { UofxToastController } from '@uofx/web-components/toast';
+import { UofxUserSetItemType } from '@uofx/web-components/user-select';
 
 /**
  * 驗證行動電話的格式
@@ -46,98 +44,89 @@ export function createApplyDateValidator(days: number): ValidatorFn {
     if (!value) {
       return null;
     }
-    console.log('applyvalue', JSON.stringify(value));
+
     const today = new Date();
     const applyDateVal = new Date(value);
-    if (!applyDateVal)
+    if (isNaN(applyDateVal.getTime())) {
       return null;
+    }
     const timeDiff = Math.abs(applyDateVal.getTime() - today.getTime());
     const diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
-    if (diffDays > days)
-      return { invalidApplyDate: true };
-    else
-      return null;
+    return diffDays > days ? { invalidApplyDate: true } : null;
   }
 }
 
 @Component({
-  selector: 'uofx-advanced-field-props-component',
+  selector: 'uofx-advanced-field-props',
   templateUrl: './advanced-field.write.component.html',
   styleUrls: ['./advanced-field.write.component.scss']
 })
 export class AdvancedFieldWriteComponent extends BpmFwWriteComponent implements OnInit {
-  form: UntypedFormGroup;
-  value: AdvancedFieldModel;
+  /** 屬性資料 */
   @Input() exProps: AdvancedFieldExProps;
 
+  /** 登入者公司id */
   corpId = Settings.UserInfo.corpId;
-
+  /** form group */
+  form: UntypedFormGroup;
+  /** 填寫model */
+  value: AdvancedFieldModel;
+  /** 錯誤訊息 */
   errorMessage = [];
+  /** 員工編號 */
   empNo: string;
-  applyDateCtrl: UntypedFormControl;
-  mobileCtrl: UntypedFormControl;
-  constructor(private fb: UntypedFormBuilder,
+  /** 選人員件限制-僅選人 */
+  userSelectTypes: Array<UofxUserSetItemType> = [UofxUserSetItemType.DeptEmployee];
+
+  constructor(
+    private fb: UntypedFormBuilder,
     private tools: UofxFormTools,
-    private cdr: ChangeDetectorRef,
     private pluginService: UofxPluginApiService,
     private empService: EmployeeService,
     private toastCtrl: UofxToastController,
-
+    private fieldLogic: UofxFormFieldLogic
   ) {
     super();
   }
 
   ngOnInit(): void {
     this.toastCtrl.saved();
-    console.log('Advance field ngOnInit');
     this.initForm();
 
-    console.log('this.exProps.checkDays:', this.exProps.checkDays);
-    console.log('value:', this.value)
-    console.log('variables:', this.taskNodeInfo.variables)
+    console.log('欄位屬性:', this.exProps);
+    console.log('填寫的值:', this.value)
+    console.log('表單變數:', this.taskNodeInfo.variables)
+    this.getTargetFieldValue('Reason').then(res => {
+      console.log('取得欄位代號為 Reason 的欄位資料:', res);
+    });
+
     this.loadInfo();
 
-    console.log('ngOnInit getTargetFieldValue');
-    this.getTargetFieldValue('Reason').then(res => {
-      console.log('Reason', res);
-    })
+    // 訂閱parent form的status changes，送出時，一併顯示欄位內整張form的錯誤訊息
+    this.fieldLogic.parentFormBinding(this.parentForm, this.selfControl, this.form);
 
-    this.parentForm.statusChanges.subscribe(res => {
+    this.form.valueChanges.subscribe({
+      next: res => {
+        // 更新每次的value結果，為了跨欄位存取使用。
+        this.fieldLogic.setSelfControlValue(this.selfControl, this.form, res);
 
-      if (res === 'INVALID' && this.selfControl.dirty) {
-        if (!this.form.dirty) {
-          Object.keys(this.form.controls).forEach(key => {
-            this.tools.markFormControl(this.form.get(key));
-          });
-          this.form.markAllAsTouched();
-          this.form.markAsDirty();
-          //強制formgroup驗證狀態
-          //this.tools.markFormGroup(this.form);
-        }
+        // 真正送出欄位值變更的函式
+        this.valueChanges.emit(res);
       }
     });
-
-    this.form.valueChanges.subscribe(res => {
-      console.log('valueChanges', res);
-
-      this.selfControl.setValue(res);
-
-      // 真正送出欄位值變更的函式
-      this.valueChanges.emit(res);
-
-    });
-    this.cdr.detectChanges();
   }
 
+  /** 初始化form */
   initForm() {
-    console.log('initForm', this.exProps);
     this.form = this.fb.group({
-      'empNo': [this.value?.empNo ?? '', Validators.required],
-      'mobile': [this.value?.mobile ?? '', [createMobileValidator(), Validators.minLength(10)]],
-      'applyDate': [this.value?.applyDate, [Validators.required, createApplyDateValidator(this.exProps.checkDays)]]
+      'account': null,
+      'empNo': [null, Validators.required],
+      'mobile': [null, [Validators.required, UofxValidators.phoneNumber]],
+      'applyDate': [null, [Validators.required, createApplyDateValidator(this.exProps.checkDays)]],
+      'agent': [null, Validators.required]
     });
-    this.applyDateCtrl = this.form.controls.applyDate as UntypedFormControl;
-    this.mobileCtrl = this.form.controls.mobile as UntypedFormControl;
+
+    this.setFormValue();
 
     // 表單送出時驗證
     if (this.selfControl) {
@@ -145,77 +134,83 @@ export class AdvancedFieldWriteComponent extends BpmFwWriteComponent implements 
       this.selfControl.setValidators(validateSelf(this.form));
       this.selfControl.updateValueAndValidity();
     }
-
   }
 
+  /** 填入資料 */
+  setFormValue() {
+    if (this.value) {
+      this.form.controls.empNo.setValue(this.value.empNo);
+      this.form.controls.mobile.setValue(this.value.mobile);
+      this.form.controls.applyDate.setValue(this.value.applyDate);
+      this.form.controls.agent.setValue(this.value.agent);
+    }
+  }
 
   /**
    * 表單送出前會呼叫此函式做檢查
    * @param {boolean} checkValidator 按下表單下方按鈕時是否要檢查表單驗證
    * @return {*}  {Promise<boolean>}
-   * @memberof AdvancedFieldComponent
    */
   checkBeforeSubmit(checkValidator: boolean): Promise<boolean> {
-    return new Promise(resolve => {
-      const value = this.form.value;
-      console.log(value);
-      //呼叫api之前要設定serverUrl為外掛欄未站台位址
-      this.empService.serverUrl = this.pluginSetting?.entryHost;
-      //呼叫api檢查是否是有效的帳號
-      this.empService.getValidEmpNumber().subscribe(res => {
-        if (res?.length ?? 0 > 0) {
-          const ary = res;
-          if (ary.indexOf(this.empNo) < 0) {
-            this.errorMessage.push('無效的員工編號');
-            //this.cdr.detectChanges();
-            console.log('errormsg', this.errorMessage);
-            resolve(false);
+    this.errorMessage = [];
+    this.tools.markFormGroup(this.form);
 
-          }
-          else
-            resolve(true);
-        }
-        else
-          resolve(false);
-      });
+    return new Promise(resolve => {
+
+      const formValue = this.form.value;
+      console.log('checkBeforeSubmit', formValue);
+
+      //呼叫api之前要設定serverUrl為外掛欄位站台位址
+      this.empService.serverUrl = this.pluginSetting?.entryHost;
+      console.log('checkBeforeSubmit-entryHost =', this.pluginSetting?.entryHost);
+
+      // 放在checkBeforeSubmit中，如果是暫存就不需要驗證必填，且清除form control error
+      this.fieldLogic.checkValidators(checkValidator, this.selfControl, this.form);
+
+      if (checkValidator) {
+
+        if (this.form.invalid) return resolve(false);
+        this.checkValidEmpNo(formValue, resolve);
+
+      } else {
+        resolve(true);
+      }
+
     });
   }
 
-  getFormControl(ctrl: string) {
-    return this.form.get(ctrl) as UntypedFormControl;
-    //form.controls.email
+  /** 驗證員編 */
+  checkValidEmpNo(formValue, resolve) {
+    this.empService.getValidEmpNumber().subscribe({
+      next: res => {
+        console.log('有效的員編', res);
+        if (res?.includes(formValue.empNo)) {
+          this.errorMessage = [];
+          resolve(true);
+        } else {
+          this.errorMessage.push('無效的員工編號');
+          console.log('errormsg', this.errorMessage);
+          resolve(false);
+        }
+      }
+    });
   }
 
+  /** 取得員工資訊 */
   loadInfo() {
-    // 呼叫api取得員工相關資訊
-    this.pluginService.getUserInfo(this.taskNodeInfo.applicantId)
-      .pipe(
-        switchMap(empInfo => {
-          return this.pluginService.getCorpInfo()
-        })
-      ).subscribe({
-        next: (empInfo) => {
-          // console.log('empInfo', empInfo);
-          // if (empInfo.employeeNumber) {
-          //   // 取得員工編號
-          //   this.empNo = empInfo.employeeNumber;
-          //   this.form.controls.empNo.setValue(this.empNo);
-          // } else {
-          //   this.empNo = '申請者未設定員工編號';
-          // }
-        },
-        error: () => {
-          this.empNo = '無法取得申請者員工編號';
-          this.empNo = 'A001';
-          this.form.controls.empNo.setValue('A001');
-        },
-        complete: () => {
-          console.log('empNo', this.empNo);
-          // 讓畫面更新
-          this.cdr.detectChanges();
-          return Promise.resolve(true);
-        }
-      });
+    this.pluginService.getUserInfo(this.taskNodeInfo.applicantId).subscribe({
+      next: (empInfo) => {
+        console.log('員工資訊', empInfo);
+
+        this.form.controls.account.setValue(empInfo.account);
+      },
+      error: () => {
+        console.log('無法取得員工資訊');
+      },
+      complete: () => {
+        return Promise.resolve(true);
+      }
+    });
   }
 }
 
@@ -225,4 +220,3 @@ function validateSelf(form: UntypedFormGroup): ValidatorFn {
     return form.valid ? null : { formInvalid: true };
   }
 }
-
