@@ -1,0 +1,23 @@
+<form [formGroup]="form">
+  <section class="padding-horizontal-2x">
+    <div class="margin-vertical-2x">
+      <p-checkbox formControlName="isShowEmpNo" inputId="isShowEmpNo" [binary]="true" [label]="'顯示員工編號'"></p-checkbox>
+    </div>
+    <div class="margin-vertical-2x">
+      <p-checkbox formControlName="isCheckDate" #mCheck [binary]="true" [label]="'檢查申請日期符合區間'"></p-checkbox>
+    </div>
+    <div class="margin-vertical-2x d-flex align-items-center">
+      <div>
+        <span>申請日期範圍</span>
+      </div>
+      <div class="margin-left">
+        <input type="text" pInputText formControlName="checkDays" />
+        <uofx-form-error-tip [control]="checkDaysCtrl">
+          <div *ngIf="checkDaysCtrl.hasError('required') || checkDaysCtrl.hasError('invalidMobile')">
+            請輸入天數
+          </div>
+        </uofx-form-error-tip>
+      </div>
+    </div>
+  </section>
+</form>
